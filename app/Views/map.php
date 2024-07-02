@@ -58,8 +58,24 @@
                             <table class="table align-middle">
                                 <tbody>
                                     <tr>
-                                        <td><div class="line-admin"></div></td>
-                                        <td>Batas Administrasi</td>
+                                        <td><div class="heks-legenda" style="background-color:#0BE172"></div></td>
+                                        <td>Sangat Sehat</td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="heks-legenda" style="background-color:#5BB46A"></div></td>
+                                        <td>Sehat</td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="heks-legenda" style="background-color:#AA8762"></div></td>
+                                        <td>Kurang Sehat</td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="heks-legenda" style="background-color:#FA5A5A"></div></td>
+                                        <td>Tidak Sehat</td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="heks-legenda" style="background-color:white"></div></td>
+                                        <td>Tidak Terkategori</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -81,6 +97,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <?php echo view("components/data/administrasi");?>
     <?php echo view("components/data/heksagon");?>
+    <?php echo view("components/data/datastd");?>
+    <?php echo view("components/data/datagwr");?>
     <?php echo view("components/mapjs");?>
 </body>
 </html>

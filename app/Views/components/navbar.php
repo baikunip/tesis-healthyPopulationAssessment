@@ -26,12 +26,7 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" aria-current="page" href="https://github.com/baikunip" target="_blank"><i class="bi bi-github"></i> Github</a></li>
             <li><a class="dropdown-item" aria-current="page" href="https://www.instagram.com/baikunip/" target="_blank"><i class="bi bi-instagram"></i> Instagram</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li>
       </ul>
       <form class="d-flex" role="search">
