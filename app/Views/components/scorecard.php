@@ -37,14 +37,16 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th scope="col">Variabel</th>
-                                <th scope="col">Estimator</th>
-                                <th scope="col">Proporsi Kontribusi</th>
-                                <th scope="col">Sangat Sehat</th>
-                                <th scope="col">Sehat</th>
-                                <th scope="col">Kurang Sehat</th>
-                                <th scope="col">Tidak Sehat</th>
-                                <th scope="col">Nilai</th>
+                                <th scope="col" rowspan=2>Variabel</th>
+                                <th scope="col" rowspan=2>Estimator</th>
+                                <th scope="col" rowspan=2>Proporsi Kontribusi</th>
+                                <th scope="col" colspan=3 class="text-center">Interval Kasus Penyakit Menular</th>
+                                <th scope="col" rowspan=2>Nilai</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">37</th>
+                                <th scope="col">69</th>
+                                <th scope="col">112</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -68,9 +70,6 @@
                                         11.56
                                     </td>
                                     <td id="rb-kurang-sehat">
-                                        11.56
-                                    </td>
-                                    <td id="rb-tidak-sehat">
                                         11.56
                                     </td>
                                     <td>
@@ -98,9 +97,6 @@
                                         11.56
                                     </td>
                                     <td id="layair-kurang-sehat">
-                                        11.56
-                                    </td>
-                                    <td id="layair-tidak-sehat">
                                         11.56
                                     </td>
                                     <td>
@@ -132,9 +128,6 @@
                                     <td id="id-kurang-sehat">
                                         11.56
                                     </td>
-                                    <td id="id-tidak-sehat">
-                                        11.56
-                                    </td>
                                     <td>
                                         <div class="input-group mb-3">
                                             <input type="number" class="form-control" placeholder="Jumlah Simpangan" step=".01" min=0 aria-label="Jumlah Simpangan" id="id-input" aria-describedby="id-label">
@@ -159,9 +152,6 @@
                                         11.56
                                     </td>
                                     <td id="ent-kurang-sehat">
-                                        11.56
-                                    </td>
-                                    <td id="ent-tidak-sehat">
                                         11.56
                                     </td>
                                     <td>
@@ -190,9 +180,6 @@
                                     <td id="hcdist-kurang-sehat">
                                         11.56
                                     </td>
-                                    <td id="hcdist-tidak-sehat">
-                                        11.56
-                                    </td>
                                     <td>
                                         <div class="input-group mb-3">
                                             <input type="number" class="form-control" placeholder="Jarak Terdekat (Km)" aria-label="Jarak Terdekat (Km)" step=.01 min=0  id="hcdist-input" aria-describedby="hcdist-label">
@@ -217,9 +204,6 @@
                                         11.56
                                     </td>
                                     <td id="kummean-kurang-sehat">
-                                        11.56
-                                    </td>
-                                    <td id="kummean-tidak-sehat">
                                         11.56
                                     </td>
                                     <td>
@@ -251,9 +235,6 @@
                                     <td id="pklcount-kurang-sehat">
                                         11.56
                                     </td>
-                                    <td id="pklcount-tidak-sehat">
-                                        11.56
-                                    </td>
                                     <td>
                                         <div class="input-group mb-3">
                                             <input type="number" class="form-control" min=0  id="pklcount-input" aria-describedby="pklcount-label">
@@ -278,9 +259,6 @@
                                         11.56
                                     </td>
                                     <td id="pendcount-kurang-sehat">
-                                        11.56
-                                    </td>
-                                    <td id="pendcount-tidak-sehat">
                                         11.56
                                     </td>
                                     <td>
@@ -309,9 +287,6 @@
                                     <td id="perbcount-kurang-sehat">
                                         11.56
                                     </td>
-                                    <td id="perbcount-tidak-sehat">
-                                        11.56
-                                    </td>
                                     <td>
                                         <div class="input-group mb-3">
                                             <input type="number" class="form-control" min=0  id="perbcount-input" aria-describedby="perbcount-label">
@@ -336,9 +311,6 @@
                                         11.56
                                     </td>
                                     <td id="rekrcount-kurang-sehat">
-                                        11.56
-                                    </td>
-                                    <td id="rekrcount-tidak-sehat">
                                         11.56
                                     </td>
                                     <td>
@@ -367,9 +339,6 @@
                                     <td id="soscount-kurang-sehat">
                                         11.56
                                     </td>
-                                    <td id="soscount-tidak-sehat">
-                                        11.56
-                                    </td>
                                     <td>
                                         <div class="input-group mb-3">
                                             <input type="number" class="form-control" min=0  id="soscount-input" aria-describedby="soscount-label">
@@ -394,9 +363,6 @@
                                         11.56
                                     </td>
                                     <td id="workcount-kurang-sehat">
-                                        11.56
-                                    </td>
-                                    <td id="workcount-tidak-sehat">
                                         11.56
                                     </td>
                                     <td>
