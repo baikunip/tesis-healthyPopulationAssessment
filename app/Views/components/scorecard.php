@@ -6,31 +6,46 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <h4>Model Lokal</h4>
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <th>Kategori</th>
-                                <th><span id="kategori-value" class="badge">Secondary</span></th>
-                            </tr>
-                            <tr>
-                                <th>Jumlah Penyakit Menular</th>
-                                <td id="y-value">100</td>
-                            </tr>
-                            <tr>
-                                <th>Estimasi Jumlah Penyakit Menular</th>
-                                <td id="yhat-value">100</td>
-                            </tr>
-                            <tr>
-                                <th>Residu Jumlah Penyakit Menular</th>
-                                <td id="yresidu-value">100</td>
-                            </tr>
-                            <tr>
-                                <th>Rumus Model Lokal</th>
-                                <td id="rumus-model"></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <h4>Kesehatan Area</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <th>Kategori</th>
+                                        <th><h2><span id="kategori-value" class="badge">Secondary</span></h2></th>
+                                    </tr>
+                                    <tr>
+                                        <th>Jumlah Penyakit Menular</th>
+                                        <td id="y-value">100</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Estimasi Jumlah Penyakit Menular</th>
+                                        <td id="yhat-value">100</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Residu Jumlah Penyakit Menular</th>
+                                        <td id="yresidu-value">100</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="pie-kontribusi" style="width:80%;"></div>
+                        </div>
+                        <div class="col-12"><hr></div>
+                        <div class="col-12">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <th>Rumus Model Lokal</th>
+                                        <td id="rumus-gwr" class="cormorant-upright-medium pa-2">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                     <hr class="mb-4">
                     <h4>Indikator Lingkungan Binaan</h4>
                     <div id="x-table">
@@ -377,7 +392,7 @@
                     </div> 
                     <hr class="mb-4">
                     <h4>Variabel Kontrol</h4>
-                    <table class="table">
+                    <table class="table table-borderless">
                         <thead>
                             <th></th>
                             <th>Estimator</th>
