@@ -104,5 +104,8 @@
     <?php echo view("components/data/datastd");?>
     <?php echo view("components/data/datagwr");?>
     <?php echo view("components/mapjs");?>
+    <script>
+        console.log(<?=$gwr?>)
+    </script>
 </body>
 </html>
