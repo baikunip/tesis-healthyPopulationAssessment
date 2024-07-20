@@ -11,7 +11,7 @@ class Home extends BaseController
     }
     public function index(): string
     {
-        $result =$this->gwr->findAll();
+        $result =$this->gwr->getData(12);
         $data["gwr"]=json_encode($result);
         return view('map',$data);
     }

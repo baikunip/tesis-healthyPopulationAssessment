@@ -101,8 +101,6 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <?php echo view("components/data/administrasi");?>
     <?php echo view("components/data/heksagon");?>
-    <?php echo view("components/data/datastd");?>
-    <?php echo view("components/data/datagwr");?>
     <?php echo view("components/mapjs");?>
     <script>
         console.log(<?=$gwr?>)

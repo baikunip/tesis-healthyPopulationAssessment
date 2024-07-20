@@ -51,8 +51,7 @@
     })
     // popup functions
     // 1. Hitung Persentase Kontribusi
-    let calKontribusi=(attr)=>{(100*Math.abs(attrgwr[attr])/totalKontribusi).toFixed(2)},
-    calNilaiBatas=(batas,data,attr,kontribusi)=>{return (Math.log(batas)-data["beta_Intercept"])*(100*Math.abs(data[attr])/kontribusi)*(data[attr]/Math.abs(data[attr]))}
+    let calNilaiBatas=(batas,data,attr,kontribusi)=>{return (Math.log(batas)-data["beta_Intercept"])*(100*Math.abs(data[attr])/kontribusi)*(data[attr]/Math.abs(data[attr]))}
     $("#kontrol-layer-btn").on("click",()=>{
         $("#modal-layer-kontrol").modal({
             show: 'true'
@@ -143,17 +142,132 @@
                 return;
             }
             let feature=features[0],
-            attrstd=datastd[feature.properties["newID"]],
-            attrgwr=datagwr[feature.properties["newID"]],
-            totalKontribusi=0
-            for (const [key, value] of Object.entries(attrgwr)) {
-                if(key.includes("beta_")&& key!="beta_Intercept")totalKontribusi+=Math.abs(value)
-            }
-            console.log("total kontribusi: "+totalKontribusi)
+            dataurl="<?=base_url("data-gwr/")?>"+feature.properties["newID"]
+            $.get({
+                url: dataurl,
+                success: (result)=>{
+                    let res=JSON.parse(result)
+
+
+                    $("#yhat-value").html(parseFloat(res.B["yhat"]).toFixed(0))
+                    $("#yresidu-value").html(parseFloat(res.B["residual"]).toFixed(0))
+
+                    $("#rb-input").val(parseFloat(res.F["X.RB"]).toFixed(2))
+                    $("#rb-betha").html(parseFloat(res.B["b_X.RB"]).toFixed(3))
+                    $("#rb-kontribusi").html((parseFloat(res.A["K.X.RB"])*100).toFixed(2)+" %")
+                    $('#rb-sangat-sehat').html(parseFloat(res.C["in37.X.RB"]).toFixed(2))
+                    $('#rb-sehat').html(parseFloat(res.D["in69.X.RB"]).toFixed(2))
+                    $('#rb-kurang-sehat').html(parseFloat(res.E["in112.X.RB"]).toFixed(2))
+                    $("#layair-input").val((parseFloat(res.F["X.Lay.Air"])*100).toFixed(2))
+                    $("#layair-betha").html(parseFloat(res.B["b_X.Lay.Air"]).toFixed(3))
+                    $("#layair-kontribusi").html((parseFloat(res.A["K.X.Lay.Air"])*100).toFixed(2)+" %")
+                    $('#layair-sangat-sehat').html((parseFloat(res.C["in37.X.Lay.Air"])*100).toFixed(2))
+                    $('#layair-sehat').html((parseFloat(res.D["in69.X.Lay.Air"])*100).toFixed(2))
+                    $('#layair-kurang-sehat').html((parseFloat(res.E["in112.X.Lay.Air"])*100).toFixed(2))
+                    $("#id-input").val(parseFloat(res.F["X.ID"]).toFixed(0))
+                    $("#id-betha").html(parseFloat(res.B["b_X.ID"]).toFixed(3))
+                    $("#id-kontribusi").html((parseFloat(res.A["K.X.ID"])*100).toFixed(2)+" %")
+                    $('#id-sangat-sehat').html((parseFloat(res.C["in37.X.ID"])*153).toFixed(0))
+                    $('#id-sehat').html((parseFloat(res.D["in69.X.ID"])*153).toFixed(0))
+                    $('#id-kurang-sehat').html((parseFloat(res.E["in112.X.ID"])*153).toFixed(0))
+                    $("#ent-input").val(parseFloat(res.F["X.Ent"]).toFixed(2))
+                    $("#ent-betha").html(parseFloat(res.B["b_X.Ent"]).toFixed(3))
+                    $("#ent-kontribusi").html((parseFloat(res.A["K.X.Ent"])*100).toFixed(2)+" %")
+                    $('#ent-sangat-sehat').html(parseFloat(res.C["in37.X.Ent"]).toFixed(2))
+                    $('#ent-sehat').html(parseFloat(res.D["in69.X.Ent"]).toFixed(2))
+                    $('#ent-kurang-sehat').html(parseFloat(res.E["in112.X.Ent"]).toFixed(2))
+                    $("#hcdist-input").val(parseFloat(res.F["X.HC.Dist"]).toFixed(2))
+                    $("#hcdist-betha").html(parseFloat(res.B["b_X.HC.Dist"]).toFixed(3))
+                    $("#hcdist-kontribusi").html((parseFloat(res.A["K.X.HC.Dist"])*100).toFixed(2)+" %")
+                    $('#hcdist-sangat-sehat').html(parseFloat(res.C["in37.X.HC.Dist"]).toFixed(2))
+                    $('#hcdist-sehat').html(parseFloat(res.D["in69.X.HC.Dist"]).toFixed(2))
+                    $('#hcdist-kurang-sehat').html(parseFloat(res.E["in112.X.HC.Dist"]).toFixed(2))
+                    $("#kummean-input").val(parseFloat(res.F["X.Kum.Mean"]).toFixed(2))
+                    $("#kummean-betha").html(parseFloat(res.B["b_X.Kum.Mean"]).toFixed(3))
+                    $("#kummean-kontribusi").html((parseFloat(res.A["K.X.Kum.Mean"])*100).toFixed(2)+" %")
+                    $('#kummean-sangat-sehat').html(parseFloat(res.C["in37.X.Kum.Mean"]).toFixed(2))
+                    $('#kummean-sehat').html(parseFloat(res.D["in69.X.Kum.Mean"]).toFixed(2))
+                    $('#kummean-kurang-sehat').html(parseFloat(res.E["in112.X.Kum.Mean"]).toFixed(2))
+                    $("#pklcount-input").val(parseFloat(res.F["X.PKL.Count"]).toFixed(0))
+                    $("#pklcount-betha").html(parseFloat(res.B["b_X.PKL.Count"]).toFixed(3))
+                    $("#pklcount-kontribusi").html((parseFloat(res.A["K.X.PKL.Count"])*100).toFixed(2)+" %")
+                    $('#pklcount-sangat-sehat').html(parseFloat(res.C["in37.X.PKL.Count"]).toFixed(0))
+                    $('#pklcount-sehat').html(parseFloat(res.D["in69.X.PKL.Count"]).toFixed(0))
+                    $('#pklcount-kurang-sehat').html(parseFloat(res.E["in112.X.PKL.Count"]).toFixed(0))
+                    $("#pendcount-input").val(parseFloat(res.F["X.Pend.Count"]).toFixed(0))
+                    $("#pendcount-betha").html(parseFloat(res.B["b_X.Pend.Count"]).toFixed(3))
+                    $("#pendcount-kontribusi").html((parseFloat(res.A["K.X.Pend.Count"])*100).toFixed(2)+" %")
+                    $('#pendcount-sangat-sehat').html(parseFloat(res.C["in37.X.Pend.Count"]).toFixed(0))
+                    $('#pendcount-sehat').html(parseFloat(res.D["in69.X.Pend.Count"]).toFixed(0))
+                    $('#pendcount-kurang-sehat').html(parseFloat(res.E["in112.X.Pend.Count"]).toFixed(0))
+                    $("#soscount-input").val(parseFloat(res.F["X.Sos.Count"]).toFixed(0))
+                    $("#soscount-betha").html(parseFloat(res.B["b_X.Sos.Count"]).toFixed(3))
+                    $("#soscount-kontribusi").html((parseFloat(res.A["K.X.Sos.Count"])*100).toFixed(2)+" %")
+                    $('#soscount-sangat-sehat').html(parseFloat(res.C["in37.X.Sos.Count"]).toFixed(0))
+                    $('#soscount-sehat').html(parseFloat(res.D["in69.X.Sos.Count"]).toFixed(0))
+                    $('#soscount-kurang-sehat').html(parseFloat(res.E["in112.X.Sos.Count"]).toFixed(0))
+                    $("#rekrcount-input").val(parseFloat(res.F["X.Rekr.Count"]).toFixed(0))
+                    $("#rekrcount-betha").html(parseFloat(res.B["b_X.Rekr.Count"]).toFixed(3))
+                    $("#rekrcount-kontribusi").html((parseFloat(res.A["K.X.Rekr.Count"])*100).toFixed(2)+" %")
+                    $('#rekrcount-sangat-sehat').html(parseFloat(res.C["in37.X.Rekr.Count"]).toFixed(0))
+                    $('#rekrcount-sehat').html(parseFloat(res.D["in69.X.Rekr.Count"]).toFixed(0))
+                    $('#rekrcount-kurang-sehat').html(parseFloat(res.E["in112.X.Rekr.Count"]).toFixed(0))
+                    $("#workcount-input").val(parseFloat(res.F["X.Work.Count"]).toFixed(0))
+                    $("#workcount-betha").html(parseFloat(res.B["b_X.Work.Count"]).toFixed(3))
+                    $("#workcount-kontribusi").html((parseFloat(res.A["K.X.Work.Count"])*100).toFixed(2)+" %")
+                    $('#workcount-sangat-sehat').html(parseFloat(res.C["in37.X.Work.Count"]).toFixed(0))
+                    $('#workcount-sehat').html(parseFloat(res.D["in69.X.Work.Count"]).toFixed(0))
+                    $('#workcount-kurang-sehat').html(parseFloat(res.E["in112.X.Work.Count"]).toFixed(0))
+                    $("#perbcount-input").val(parseFloat(res.F["X.Perb.Count"]).toFixed(0))
+                    $("#perbcount-betha").html(parseFloat(res.B["b_X.Perb.Count"]).toFixed(3))
+                    $("#perbcount-kontribusi").html((parseFloat(res.A["K.X.Perb.Count"])*100).toFixed(2)+" %")
+                    $('#perbcount-sangat-sehat').html(parseFloat(res.C["in37.X.Perb.Count"]).toFixed(0))
+                    $('#perbcount-sehat').html(parseFloat(res.D["in69.X.Perb.Count"]).toFixed(0))
+                    $('#perbcount-kurang-sehat').html(parseFloat(res.E["in112.X.Perb.Count"]).toFixed(0))
+
+                    $("#penduduk-input").html(parseFloat(res.F["CX.Pop.Count"]).toFixed(0))
+                    $("#penduduk-betha").html(parseFloat(res.B["b_CX.Pop.Count"]).toFixed(3))
+
+                    let rumus="ln(y"+checkMinus($('#yresidu-value').html())+")= "+parseFloat(res.B["b_intercept"]).toFixed(3)+checkMinus($("#rb-betha").html())+
+                        " X<sub>RB</sub>"+checkMinus($("#layair-betha").html())+" X<sub>Lay.Air</sub>"+
+                        checkMinus($("#id-betha").html())+" X<sub>ID</sub>"+
+                        checkMinus($("#ent-betha").html())+" X<sub>Ent</sub>"+
+                        checkMinus($("#hcdist-betha").html())+" X<sub>HC.Dist</sub>"+
+                        checkMinus($("#kummean-betha").html())+" X<sub>HC.Kum.Mean</sub>"+
+                        checkMinus($("#pklcount-betha").html())+" X<sub>HC.PKL.Count</sub>"+
+                        checkMinus($("#pendcount-betha").html())+" X<sub>HC.Pend.Count</sub>"+
+                        checkMinus($("#soscount-betha").html())+" X<sub>HC.Sos.Count</sub>"+
+                        checkMinus($("#rekcount-betha").html())+" X<sub>HC.Rek.Count</sub>"+
+                        checkMinus($("#workcount-betha").html())+" X<sub>HC.Work.Count</sub>"+
+                        checkMinus($("#perbcount-betha").html())+" X<sub>HC.Perb.Count</sub>"+
+                        checkMinus($("#penduduk-betha").html())+" CX<sub>Pop.Count</sub>"
+                        $("#rumus-gwr").html(rumus)
+                        // masukkan diagram pie
+                        let xalam=(parseFloat(res.A["K.X.RB"])*100).toFixed(2)+(parseFloat(res.A["K.X.Lay.Air"])*100).toFixed(2),
+                        xterbangun=(parseFloat(res.A["K.X.Kum.Mean"])*100).toFixed(2)+(parseFloat(res.A["K.X.Ent"])*100).toFixed(2)+(parseFloat(res.A["K.X.ID"])*100).toFixed(2)+(parseFloat(res.A["K.X.HC.Dist"])*100).toFixed(2),
+                        xaktivitas=(parseFloat(res.A["K.X.PKL.Count"])*100).toFixed(2)+(parseFloat(res.A["K.X.Pend.Count"])*100).toFixed(2)+(parseFloat(res.A["K.X.Perb.Count"])*100).toFixed(2)+(parseFloat(res.A["K.X.Sos.Count"])*100).toFixed(2)+(parseFloat(res.A["K.X.Work.Count"])*100).toFixed(2)+(parseFloat(res.A["K.X.Rekr.Count"])*100).toFixed(2)
+                        var options = {
+                            chart: {
+                                type: 'pie'
+                            },
+                            series: [parseFloat(xalam),parseFloat(xterbangun),parseFloat(xaktivitas)],
+                            labels: ['Ling. Alam', 'Ling. Terbangun', 'Aktivitas'],
+                            dataLabels: {
+                                enabled: true,
+                                formatter: function (val) {
+                                    return val.toFixed(2) + "%"
+                                }
+                            },
+                            tooltip:{enabled:false}
+                            // legend:{position:"bottom"}
+                        },
+                        chart = new ApexCharts(document.querySelector("#pie-kontribusi"), options);
+                        chart.render();
+                    
+                }
+            })
             $("#scorecardlLabel").html("Nilai Lingkungan Binaan Sel No. "+feature['properties']['newID'])
             $("#y-value").html(feature['properties']['sumSakit'])
-            $("#yhat-value").html(attrgwr['gwr_yhat'].toFixed(0))
-            $("#yresidu-value").html(attrgwr['gwr_residual'].toFixed(0))
             $("#kategori-value").html(feature['properties']['kategori'].toUpperCase())
             let checkMinus=(val)=>{
                 if(val<0) return val
@@ -179,128 +293,9 @@
             }
             $("#kategori-value").css("background-color",colors.bg)
             $("#kategori-value").css("color",colors.cl)
-            console.log(Math.log(37))
             $("#scorecard").modal('show')
-            // set variabel x 
-            $("#rb-input").val(Math.abs(parseFloat(((attrstd["X.RB"]*xstats["X.RB"]["sd"])+xstats["X.RB"]["mean"])).toFixed(2)))
-            $("#rb-betha").html(attrgwr["beta_X.RB"].toFixed(3))
-            $("#rb-kontribusi").html((100*Math.abs(attrgwr["beta_X.RB"])/totalKontribusi).toFixed(2)+" %")
-            $('#rb-sangat-sehat').html(Math.min((Math.abs(calNilaiBatas(37,attrgwr,"beta_X.RB",totalKontribusi)*xstats["X.RB"]["sd"]+xstats["X.RB"]["mean"])).toFixed(2),1))
-            $('#rb-sehat').html(Math.min((Math.abs(calNilaiBatas(69,attrgwr,"beta_X.RB",totalKontribusi)*xstats["X.RB"]["sd"]+xstats["X.RB"]["mean"])).toFixed(2),1))
-            $('#rb-kurang-sehat').html(Math.min((Math.abs(calNilaiBatas(112,attrgwr,"beta_X.RB",totalKontribusi)*xstats["X.RB"]["sd"]+xstats["X.RB"]["mean"])).toFixed(2),1))
-            // $('#rb-tidak-sehat').html((Math.log(37))*$('#rb-kontribusi').val()*(attrgwr["beta_X.RB"]/Math.abs(attrgwr["beta_X.RB"])))
-            $("#layair-input").val(Math.abs(parseFloat(100*((attrstd["X.Lay.Air"]*xstats["X.Lay.Air"]["sd"])+xstats["X.Lay.Air"]["mean"])).toFixed(2)))
-            $("#layair-betha").html(attrgwr["beta_X.Lay.Air"].toFixed(3))
-            $("#layair-kontribusi").html((100*Math.abs(attrgwr["beta_X.Lay.Air"])/totalKontribusi).toFixed(2)+" %")
-            $('#layair-sangat-sehat').html(
-                (Math.log(37)
-                *(100*Math.abs(attrgwr["beta_X.Lay.Air"])/totalKontribusi)
-                *(attrgwr["beta_X.Lay.Air"]/Math.abs(attrgwr["beta_X.Lay.Air"])))
-                .toFixed(2)
-            )
-            $('#layair-sehat').html((Math.log(69))*(100*Math.abs(attrgwr["beta_X.Lay.Air"])/totalKontribusi)*(attrgwr["beta_X.Lay.Air"]/Math.abs(attrgwr["beta_X.Lay.Air"])).toFixed(2))
-            $('#layair-kurang-sehat').html((Math.log(112))*(100*Math.abs(attrgwr["beta_X.Lay.Air"])/totalKontribusi)*(attrgwr["beta_X.Lay.Air"]/Math.abs(attrgwr["beta_X.Lay.Air"])).toFixed(2))
-            $("#id-input").val(Math.abs(156*parseFloat((attrstd["X.ID"]*xstats["X.ID"]["sd"])+xstats["X.ID"]["mean"])).toFixed(0))
-            $("#id-betha").html(attrgwr["beta_X.ID"].toFixed(3))
-            $("#id-kontribusi").html((100*Math.abs(attrgwr["beta_X.ID"])/totalKontribusi).toFixed(2)+" %")
-            $('#id-sangat-sehat').html((Math.log(37)*(100*Math.abs(attrgwr["beta_X.ID"])/totalKontribusi)*(attrgwr["beta_X.ID"]/Math.abs(attrgwr["beta_X.ID"]))).toFixed(2))
-            $('#id-sehat').html((Math.log(69)*(100*Math.abs(attrgwr["beta_X.ID"])/totalKontribusi)*(attrgwr["beta_X.ID"]/Math.abs(attrgwr["beta_X.ID"]))).toFixed(2))
-            $('#id-kurang-sehat').html((Math.log(112)*(100*Math.abs(attrgwr["beta_X.ID"])/totalKontribusi)*(attrgwr["beta_X.ID"]/Math.abs(attrgwr["beta_X.ID"]))).toFixed(2))
-            $("#ent-input").val(Math.abs(parseFloat(((attrstd["X.Ent"]*xstats["X.Ent"]["sd"])+xstats["X.Ent"]["mean"])).toFixed(2)))
-            $("#ent-betha").html(attrgwr["beta_X.Ent"].toFixed(3))
-            $("#ent-kontribusi").html((100*Math.abs(attrgwr["beta_X.Ent"])/totalKontribusi).toFixed(2)+" %")
-            $('#ent-sangat-sehat').html((Math.log(37)*(100*Math.abs(attrgwr["beta_X.Ent"])/totalKontribusi)*(attrgwr["beta_X.Ent"]/Math.abs(attrgwr["beta_X.Ent"]))).toFixed(2))
-            $('#ent-sehat').html((Math.log(69)*(100*Math.abs(attrgwr["beta_X.Ent"])/totalKontribusi)*(attrgwr["beta_X.Ent"]/Math.abs(attrgwr["beta_X.Ent"]))).toFixed(2))
-            $('#ent-kurang-sehat').html((Math.log(112)*(100*Math.abs(attrgwr["beta_X.Ent"])/totalKontribusi)*(attrgwr["beta_X.Ent"]/Math.abs(attrgwr["beta_X.Ent"]))).toFixed(2))
-            $("#hcdist-input").val(Math.abs(parseFloat(((attrstd["X.HC.Dist"]*xstats["X.HC.Dist"]["sd"])+xstats["X.HC.Dist"]["mean"])).toFixed(2)))
-            $("#hcdist-betha").html(attrgwr["beta_X.HC.Dist"].toFixed(3))
-            $("#hcdist-kontribusi").html((100*Math.abs(attrgwr["beta_X.HC.Dist"])/totalKontribusi).toFixed(2)+" %")
-            $('#hcdist-sangat-sehat').html((Math.log(37)*(100*Math.abs(attrgwr["beta_X.HC.Dist"])/totalKontribusi)*(attrgwr["beta_X.HC.Dist"]/Math.abs(attrgwr["beta_X.HC.Dist"]))).toFixed(2))
-            $('#hcdist-sehat').html((Math.log(69)*(100*Math.abs(attrgwr["beta_X.HC.Dist"])/totalKontribusi)*(attrgwr["beta_X.HC.Dist"]/Math.abs(attrgwr["beta_X.HC.Dist"]))).toFixed(2))
-            $('#hcdist-kurang-sehat').html((Math.log(112)*(100*Math.abs(attrgwr["beta_X.HC.Dist"])/totalKontribusi)*(attrgwr["beta_X.HC.Dist"]/Math.abs(attrgwr["beta_X.HC.Dist"]))).toFixed(2))
-            $("#kummean-input").val(Math.abs(parseFloat(((attrstd["X.Kum.Mean"]*xstats["X.Kum.Mean"]["sd"])+xstats["X.Kum.Mean"]["mean"])).toFixed(2)))
-            $("#kummean-betha").html(attrgwr["beta_X.Kum.Mean"].toFixed(3))
-            $("#kummean-kontribusi").html((100*Math.abs(attrgwr["beta_X.Kum.Mean"])/totalKontribusi).toFixed(2)+" %")
-            $('#kummean-sangat-sehat').html((Math.log(37)*(100*Math.abs(attrgwr["beta_X.Kum.Mean"])/totalKontribusi)*(attrgwr["beta_X.Kum.Mean"]/Math.abs(attrgwr["beta_X.Kum.Mean"]))).toFixed(2))
-            $('#kummean-sehat').html((Math.log(69)*(100*Math.abs(attrgwr["beta_X.Kum.Mean"])/totalKontribusi)*(attrgwr["beta_X.Kum.Mean"]/Math.abs(attrgwr["beta_X.Kum.Mean"]))).toFixed(2))
-            $('#kummean-kurang-sehat').html((Math.log(112)*(100*Math.abs(attrgwr["beta_X.Kum.Mean"])/totalKontribusi)*(attrgwr["beta_X.Kum.Mean"]/Math.abs(attrgwr["beta_X.Kum.Mean"]))).toFixed(2))
-            $("#pklcount-input").val(Math.abs(parseFloat(((attrstd["X.PKL.Count"]*xstats["X.PKL.Count"]["sd"])+xstats["X.PKL.Count"]["mean"])).toFixed(0)))
-            $("#pklcount-betha").html(attrgwr["beta_X.PKL.Count"].toFixed(3))
-            $("#pklcount-kontribusi").html((100*Math.abs(attrgwr["beta_X.PKL.Count"])/totalKontribusi).toFixed(2)+" %")
-            $('#pklcount-sangat-sehat').html((Math.log(37)*(100*Math.abs(attrgwr["beta_X.PKL.Count"])/totalKontribusi)*(attrgwr["beta_X.PKL.Count"]/Math.abs(attrgwr["beta_X.PKL.Count"]))).toFixed(2))
-            $('#pklcount-sehat').html((Math.log(69)*(100*Math.abs(attrgwr["beta_X.PKL.Count"])/totalKontribusi)*(attrgwr["beta_X.PKL.Count"]/Math.abs(attrgwr["beta_X.PKL.Count"]))).toFixed(2))
-            $('#pklcount-kurang-sehat').html((Math.log(112)*(100*Math.abs(attrgwr["beta_X.PKL.Count"])/totalKontribusi)*(attrgwr["beta_X.PKL.Count"]/Math.abs(attrgwr["beta_X.PKL.Count"]))).toFixed(2))
-            $("#pendcount-input").val(Math.abs(parseFloat(((attrstd["X.Pend.Count"]*xstats["X.Pend.Count"]["sd"])+xstats["X.Pend.Count"]["mean"])).toFixed(0)))
-            $("#pendcount-betha").html(attrgwr["beta_X.Pend.Count"].toFixed(3))
-            $("#pendcount-kontribusi").html((100*Math.abs(attrgwr["beta_X.Pend.Count"])/totalKontribusi).toFixed(2)+" %")
-            $('#pendcount-sangat-sehat').html((Math.log(37)*(100*Math.abs(attrgwr["beta_X.Pend.Count"])/totalKontribusi)*(attrgwr["beta_X.Pend.Count"]/Math.abs(attrgwr["beta_X.Pend.Count"]))).toFixed(2))
-            $('#pendcount-sehat').html((Math.log(69)*(100*Math.abs(attrgwr["beta_X.Pend.Count"])/totalKontribusi)*(attrgwr["beta_X.Pend.Count"]/Math.abs(attrgwr["beta_X.Pend.Count"]))).toFixed(2))
-            $('#pendcount-kurang-sehat').html((Math.log(112)*(100*Math.abs(attrgwr["beta_X.Pend.Count"])/totalKontribusi)*(attrgwr["beta_X.Pend.Count"]/Math.abs(attrgwr["beta_X.Pend.Count"]))).toFixed(2))  
-            $("#soscount-input").val(Math.abs(parseFloat(((attrstd["X.Sos.Count"]*xstats["X.Sos.Count"]["sd"])+xstats["X.Sos.Count"]["mean"])).toFixed(0)))
-            $("#soscount-betha").html(attrgwr["beta_X.Sos.Count"].toFixed(3))
-            $("#soscount-kontribusi").html((100*Math.abs(attrgwr["beta_X.Sos.Count"])/totalKontribusi).toFixed(2)+" %")
-            $('#soscount-sangat-sehat').html((Math.log(37)*(100*Math.abs(attrgwr["beta_X.Sos.Count"])/totalKontribusi)*(attrgwr["beta_X.Sos.Count"]/Math.abs(attrgwr["beta_X.Sos.Count"]))).toFixed(2))
-            $('#soscount-sehat').html((Math.log(69)*(100*Math.abs(attrgwr["beta_X.Sos.Count"])/totalKontribusi)*(attrgwr["beta_X.Sos.Count"]/Math.abs(attrgwr["beta_X.Sos.Count"]))).toFixed(2))
-            $('#soscount-kurang-sehat').html((Math.log(112)*(100*Math.abs(attrgwr["beta_X.Sos.Count"])/totalKontribusi)*(attrgwr["beta_X.Sos.Count"]/Math.abs(attrgwr["beta_X.Sos.Count"]))).toFixed(2))
-            $("#rekrcount-input").val(Math.abs(parseFloat(((attrstd["X.Rekr.Count"]*xstats["X.Rekr.Count"]["sd"])+xstats["X.Rekr.Count"]["mean"])).toFixed(0)))
-            $("#rekrcount-betha").html(attrgwr["beta_X.Rekr.Count"].toFixed(3))
-            $("#rekrcount-kontribusi").html((100*Math.abs(attrgwr["beta_X.Rekr.Count"])/totalKontribusi).toFixed(2)+" %")
-            $('#rekrcount-sangat-sehat').html((Math.log(37)*(100*Math.abs(attrgwr["beta_X.Rekr.Count"])/totalKontribusi)*(attrgwr["beta_X.Rekr.Count"]/Math.abs(attrgwr["beta_X.Rekr.Count"]))).toFixed(2))
-            $('#rekrcount-sehat').html((Math.log(69)*(100*Math.abs(attrgwr["beta_X.Rekr.Count"])/totalKontribusi)*(attrgwr["beta_X.Rekr.Count"]/Math.abs(attrgwr["beta_X.Rekr.Count"]))).toFixed(2))
-            $('#rekrcount-kurang-sehat').html((Math.log(112)*(100*Math.abs(attrgwr["beta_X.Rekr.Count"])/totalKontribusi)*(attrgwr["beta_X.Rekr.Count"]/Math.abs(attrgwr["beta_X.Rekr.Count"]))).toFixed(2))      
-            $("#workcount-input").val(Math.abs(parseFloat(((attrstd["X.Work.Count"]*xstats["X.Work.Count"]["sd"])+xstats["X.Work.Count"]["mean"])).toFixed(0)))
-            $("#workcount-betha").html(attrgwr["beta_X.Work.Count"].toFixed(3))
-            $("#workcount-kontribusi").html((100*Math.abs(attrgwr["beta_X.Work.Count"])/totalKontribusi).toFixed(2)+" %")
-            $('#workcount-sangat-sehat').html((Math.log(37)*(100*Math.abs(attrgwr["beta_X.Work.Count"])/totalKontribusi)*(attrgwr["beta_X.Work.Count"]/Math.abs(attrgwr["beta_X.Work.Count"]))).toFixed(2))
-            $('#workcount-sehat').html((Math.log(69)*(100*Math.abs(attrgwr["beta_X.Rekr.Count"])/totalKontribusi)*(attrgwr["beta_X.Rekr.Count"]/Math.abs(attrgwr["beta_X.Rekr.Count"]))).toFixed(2))
-            $('#workcount-kurang-sehat').html((Math.log(112)*(100*Math.abs(attrgwr["beta_X.Rekr.Count"])/totalKontribusi)*(attrgwr["beta_X.Rekr.Count"]/Math.abs(attrgwr["beta_X.Rekr.Count"]))).toFixed(2))                
-            $("#perbcount-input").val(Math.abs(parseFloat(((attrstd["X.Perb.Count"]*xstats["X.Perb.Count"]["sd"])+xstats["X.Perb.Count"]["mean"])).toFixed(0)))
-            $("#perbcount-betha").html(attrgwr["beta_X.Perb.Count"].toFixed(3))
-            $("#perbcount-kontribusi").html((100*Math.abs(attrgwr["beta_X.Perb.Count"])/totalKontribusi).toFixed(2)+" %")
-            $('#perbcount-sangat-sehat').html((Math.log(37)*(100*Math.abs(attrgwr["beta_X.Perb.Count"])/totalKontribusi)*(attrgwr["beta_X.Perb.Count"]/Math.abs(attrgwr["beta_X.Perb.Count"]))).toFixed(2))
-            $('#perbcount-sehat').html((Math.log(69)*(100*Math.abs(attrgwr["beta_X.Perb.Count"])/totalKontribusi)*(attrgwr["beta_X.Perb.Count"]/Math.abs(attrgwr["beta_X.Perb.Count"]))).toFixed(2))
-            $('#perbcount-kurang-sehat').html((Math.log(112)*(100*Math.abs(attrgwr["beta_X.Perb.Count"])/totalKontribusi)*(attrgwr["beta_X.Perb.Count"]/Math.abs(attrgwr["beta_X.Perb.Count"]))).toFixed(2))                
-            $("#penduduk-input").html(Math.abs(parseFloat(((attrstd["CX.Pop.Count"]*xstats["CX.Pop.Count"]["sd"])+xstats["CX.Pop.Count"]["mean"])).toFixed(0)))
-            $("#penduduk-betha").html(attrgwr["beta_CX.Pop.Count"].toFixed(3))
-            $("#penduduk-kontribusi").html((100*Math.abs(attrgwr["beta_X.Lay.Air"])/totalKontribusi).toFixed(2)+" %")
-
-
-            let rumus="ln(y"+checkMinus($('#yresidu-value').html())+")= "+attrgwr["beta_Intercept"].toFixed(3)+checkMinus($("#rb-betha").html())+
-            " X<sub>RB</sub>"+checkMinus($("#layair-betha").html())+" X<sub>Lay.Air</sub>"+
-            checkMinus($("#id-betha").html())+" X<sub>ID</sub>"+
-            checkMinus($("#ent-betha").html())+" X<sub>Ent</sub>"+
-            checkMinus($("#hcdist-betha").html())+" X<sub>HC.Dist</sub>"+
-            checkMinus($("#kummean-betha").html())+" X<sub>HC.Kum.Mean</sub>"+
-            checkMinus($("#pklcount-betha").html())+" X<sub>HC.PKL.Count</sub>"+
-            checkMinus($("#pendcount-betha").html())+" X<sub>HC.Pend.Count</sub>"+
-            checkMinus($("#soscount-betha").html())+" X<sub>HC.Sos.Count</sub>"+
-            checkMinus($("#rekcount-betha").html())+" X<sub>HC.Rek.Count</sub>"+
-            checkMinus($("#workcount-betha").html())+" X<sub>HC.Work.Count</sub>"+
-            checkMinus($("#perbcount-betha").html())+" X<sub>HC.Perb.Count</sub>"+
-            checkMinus($("#penduduk-betha").html())+" CX<sub>Pop.Count</sub>"
-            $("#rumus-gwr").html(rumus)
-            // masukkan diagram pie
-            let xalam=(100*((Math.abs(attrgwr["beta_X.RB"])/totalKontribusi)+(Math.abs(attrgwr["beta_X.Lay.Air"])/totalKontribusi))).toFixed(2),
-            xterbangun=(100*((Math.abs(attrgwr["beta_X.ID"])/totalKontribusi)+(Math.abs(attrgwr["beta_X.Ent"])/totalKontribusi)+(Math.abs(attrgwr["beta_X.HC.Dist"])/totalKontribusi)+(Math.abs(attrgwr["beta_X.Kum.Mean"])/totalKontribusi))).toFixed(2),
-            xaktivitas=(100*((Math.abs(attrgwr["beta_X.PKL.Count"])/totalKontribusi)+(Math.abs(attrgwr["beta_X.Pend.Count"])/totalKontribusi)+(Math.abs(attrgwr["beta_X.Perb.Count"])/totalKontribusi)+(Math.abs(attrgwr["beta_X.Rekr.Count"])/totalKontribusi)+(Math.abs(attrgwr["beta_X.Work.Count"])/totalKontribusi)+(Math.abs(attrgwr["beta_X.Sos.Count"])/totalKontribusi))).toFixed(2),
-            cx=(100*(Math.abs(attrgwr["beta_CX.Pop.Count"])/totalKontribusi)).toFixed(2)
-            var options = {
-                chart: {
-                    type: 'pie'
-                },
-                series: [parseFloat(cx),parseFloat(xalam),parseFloat(xterbangun),parseFloat(xaktivitas)],
-                labels: ['Jumlah Penduduk', 'Ling. Alam', 'Ling. Terbangun', 'Aktivitas'],
-                dataLabels: {
-                    enabled: true,
-                    formatter: function (val) {
-                        return val.toFixed(2) + "%"
-                    }
-                },
-                // legend:{position:"bottom"}
-            },
-            chart = new ApexCharts(document.querySelector("#pie-kontribusi"), options);
-            console.log(options)
-            chart.render();
+            // // set variabel x 
+            
         })
         map.on('mousemove', (e)=>{
             let features = map.queryRenderedFeatures(e.point, { layers: ['lyr-heksagon'] });

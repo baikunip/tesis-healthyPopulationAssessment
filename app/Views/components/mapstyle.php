@@ -47,6 +47,23 @@ html, body, #map {
     max-height:47vh;
     overflow:scroll;
 }
+/* status sehat */
+.label-sangat-sehat{
+  color:white;
+  background-color:#0BE172;
+}
+.label-sehat{
+  color:white;
+  background-color:#5BB46A;
+}
+.label-kurang-sehat{
+  color:white;
+  background-color:#AA8762;
+}
+.label-tidak-sehat{
+  color:white;
+  background-color:#FA5A5A;
+}
 /* legenda */
 .line-admin{
     width:25px;

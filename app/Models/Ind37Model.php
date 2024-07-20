@@ -4,9 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class GwrModel extends Model
+class Ind37Model extends Model
 {
-    protected $table            = 'gwr_results';
+    protected $table            = 'ind_37';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
@@ -44,6 +44,6 @@ class GwrModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
     function getData($id){
-        return $this->db->table('gwr_results')->where('id',$id)->get()->getResult()[0];
+        return $this->db->table('ind_37')->where('id',$id)->get()->getResult()[0];
     }
 }

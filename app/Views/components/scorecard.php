@@ -59,9 +59,9 @@
                                 <th scope="col" rowspan=2>Nilai</th>
                             </tr>
                             <tr>
-                                <th scope="col">37</th>
+                                <th scope="col">&lt; 37</th>
                                 <th scope="col">69</th>
-                                <th scope="col">112</th>
+                                <th scope="col">112 &gt;</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -90,7 +90,7 @@
                                     <td>
                                         <!-- <input type="range" class="form-range pa-0" min="0" max="1" step="0.01" id="rb-input"> -->
                                         <div class="input-group mb-3">
-                                            <input type="number" class="form-control" step=".01" min=0 max=1 id="rb-input" aria-describedby="rb-label">
+                                            <input type="number" class="form-control" disabled step=".01" min=0 max=1 id="rb-input" aria-describedby="rb-label">
                                             <span class="input-group-text" id="rb-label">Indeks Risiko Banjir</span>
                                         </div>
                                     </td>
@@ -116,7 +116,7 @@
                                     </td>
                                     <td>
                                         <div class="input-group mb-3">
-                                            <input type="number" class="form-control" placeholder="Jumlah Penduduk Terlayani" min="0" step=".01" aria-label="Jumlah Penduduk Terlayani" id="layair-input" name="layair-input" aria-describedby="layair-label">
+                                            <input type="number" class="form-control" disabled placeholder="Jumlah Penduduk Terlayani" min="0" step=".01" aria-label="Jumlah Penduduk Terlayani" id="layair-input" name="layair-input" aria-describedby="layair-label">
                                             <span class="input-group-text" id="layair-label">%</span>
                                         </div>
                                     </td>
@@ -145,7 +145,7 @@
                                     </td>
                                     <td>
                                         <div class="input-group mb-3">
-                                            <input type="number" class="form-control" placeholder="Jumlah Simpangan" step=".01" min=0 aria-label="Jumlah Simpangan" id="id-input" aria-describedby="id-label">
+                                            <input type="number" class="form-control" disabled placeholder="Jumlah Simpangan" step=".01" min=0 aria-label="Jumlah Simpangan" id="id-input" aria-describedby="id-label">
                                             <span class="input-group-text" id="id-label">Simpangan</span>
                                         </div>
                                     </td>
@@ -171,7 +171,7 @@
                                     </td>
                                     <td>
                                         <div class="input-group mb-3">
-                                            <input type="number" class="form-control" step=".01" min=0 max=1 id="ent-input" aria-describedby="ent-label">
+                                            <input type="number" class="form-control" disabled step=".01" min=0 max=1 id="ent-input" aria-describedby="ent-label">
                                             <span class="input-group-text" id="ent-label">Entropy</span>
                                         </div>
                                     </td>
@@ -197,7 +197,7 @@
                                     </td>
                                     <td>
                                         <div class="input-group mb-3">
-                                            <input type="number" class="form-control" placeholder="Jarak Terdekat (Km)" aria-label="Jarak Terdekat (Km)" step=.01 min=0  id="hcdist-input" aria-describedby="hcdist-label">
+                                            <input type="number" class="form-control" disabled placeholder="Jarak Terdekat (Km)" aria-label="Jarak Terdekat (Km)" step=.01 min=0  id="hcdist-input" aria-describedby="hcdist-label">
                                             <span class="input-group-text" id="hcdist-label">KM</span>
                                         </div>
                                     </td>
@@ -223,7 +223,7 @@
                                     </td>
                                     <td>
                                         <div class="input-group mb-3">
-                                            <input type="number" class="form-control" step=.01 min=0  id="kummean-input" aria-describedby="kummean-label">
+                                            <input type="number" class="form-control" disabled step=.01 min=0  id="kummean-input" aria-describedby="kummean-label">
                                             <span class="input-group-text" id="kummean-label">Skor/100</span>
                                         </div>
                                     </td>
@@ -252,7 +252,7 @@
                                     </td>
                                     <td>
                                         <div class="input-group mb-3">
-                                            <input type="number" class="form-control" min=0  id="pklcount-input" aria-describedby="pklcount-label">
+                                            <input type="number" class="form-control" disabled min=0  id="pklcount-input" aria-describedby="pklcount-label">
                                             <span class="input-group-text" id="pklcount-label">Titik</span>
                                         </div>
                                     </td>
@@ -278,7 +278,7 @@
                                     </td>
                                     <td>
                                         <div class="input-group mb-3">
-                                            <input type="number" class="form-control" min=0  id="pendcount-input" aria-describedby="pendcount-label">
+                                            <input type="number" class="form-control" disabled min=0  id="pendcount-input" aria-describedby="pendcount-label">
                                             <span class="input-group-text" id="pendcount-label">Titik</span>
                                         </div>
                                     </td>
@@ -304,7 +304,7 @@
                                     </td>
                                     <td>
                                         <div class="input-group mb-3">
-                                            <input type="number" class="form-control" min=0  id="perbcount-input" aria-describedby="perbcount-label">
+                                            <input type="number" class="form-control" disabled min=0  id="perbcount-input" aria-describedby="perbcount-label">
                                             <span class="input-group-text" id="perbcount-label">Titik</span>
                                         </div>
                                     </td>
@@ -330,7 +330,7 @@
                                     </td>
                                     <td>
                                         <div class="input-group mb-3">
-                                            <input type="number" class="form-control" min=0  id="rekrcount-input" aria-describedby="rekrcount-label">
+                                            <input type="number" class="form-control" disabled min=0  id="rekrcount-input" aria-describedby="rekrcount-label">
                                             <span class="input-group-text" id="rekrcount-label">Titik</span>
                                         </div>
                                     </td>
@@ -356,7 +356,7 @@
                                     </td>
                                     <td>
                                         <div class="input-group mb-3">
-                                            <input type="number" class="form-control" min=0  id="soscount-input" aria-describedby="soscount-label">
+                                            <input type="number" class="form-control" disabled min=0  id="soscount-input" aria-describedby="soscount-label">
                                             <span class="input-group-text" id="soscount-label">Titik</span>
                                         </div>
                                     </td>
@@ -382,7 +382,7 @@
                                     </td>
                                     <td>
                                         <div class="input-group mb-3">
-                                            <input type="number" class="form-control" min=0  id="workcount-input" aria-describedby="workcount-label">
+                                            <input type="number" class="form-control" disabled min=0  id="workcount-input" aria-describedby="workcount-label">
                                             <span class="input-group-text" id="workcount-label">Titik</span>
                                         </div>
                                     </td>
@@ -396,14 +396,12 @@
                         <thead>
                             <th></th>
                             <th>Estimator</th>
-                            <th scope="col">Proporsi Kontribusi</th>
                             <th>Jumlah</th>
                         </thead>
                         <tbody>
                             <tr>
                                 <th>Jumlah Penduduk</th>
                                 <td id="penduduk-betha"></td>
-                                <td id="penduduk-kontribusi"></td>
                                 <td id="penduduk-input"></td>
                             </tr>
                         </tbody>
